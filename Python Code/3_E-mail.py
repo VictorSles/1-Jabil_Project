@@ -12,9 +12,10 @@ message['From'] = email_sender_1
 message['To'] = email_receiver_1
 message['Subject'] = "Meu Assunto Teste 2"
 body = "Hello, that is my first email send throught Python!! And i WIN!"
-message.attach(MIMEText(body, 'plain'))
+testeMIMEText = MIMEText(body, "plain")
+message.attach(testeMIMEText)
 server = smtplib.SMTP('smtp.gmail.com: 587')    
-server.connect('smtp.gmail.com', 587)
+server.connect(smtp_server, port)
 server.ehlo
 server.starttls()
 server.ehlo
