@@ -59,7 +59,7 @@ def envio_email():
     texto = mensagem.as_string()
     server.sendmail(email_sender, email_receiver, texto)
     server.quit()
-print(envio_email)
+envio_email()
 #           
 #  Painel de Login
 #
