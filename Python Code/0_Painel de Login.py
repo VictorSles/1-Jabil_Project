@@ -8,7 +8,7 @@ import pytz
 import smtplib 
 import os
 ## A biblioteca que me permite criar esse arquivo é:
-caminho = "/home/kali/Documents/GitHub/1-Jabil_Project/Python Code/Pasta teste"
+caminho = "Python Code/Pasta teste"
 # 
 #  Validação
 #
@@ -41,6 +41,8 @@ def dataHora():
 def sobrescricao(x): ## CONT
     global listagem
     caminho_DB = "Python Code/ArquivoDB"
+    caminho_DB_soma = "Python Code/ArquivoDB_soma"
+    listagem_DB_soma = os.listdir(caminho_DB_soma)
     listagem_DB = os.listdir(caminho_DB)
     try:
         lista_varNum = list()
@@ -48,15 +50,15 @@ def sobrescricao(x): ## CONT
         with open (caminho_final, "a") as arquivo_DB:
             lista_varNum.append(int(x))
             arquivo_DB.write(f"\n{x}")
-        lista_a = list()
+        lista_a = int()
         for item in listagem:
-            listagem_caminho_DB_2 = f"{listagem}/{item}"
-            with open(listagem_caminho_DB_2, "r") as arquivo_BD_2:
-                conteudo = arquivo_BD_2.read().strip()
-                if conteudo.isdigit():
-                    lista_a.append(item)
-        print(lista_varNum)
-        print(lista_a)
+            listagem_caminho_DB_2 = os.path.join(listagem, item)
+            if os.path.isfile(listagem_caminho_DB_2):
+                with open(listagem_caminho_DB_2, "a") as arquivo_BD_2:
+                    conteudo = arquivo_BD_2.read().strip()
+                    for item_2 in listagem_DB_soma:
+                        listagem_caminho_DB_soma = os.path.join(item_2, listagem_DB_soma):
+                            
     except Exception as e:
         print(f"Erro >>> {e}")
 dataHoraVar = dataHora() 
