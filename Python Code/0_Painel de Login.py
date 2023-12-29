@@ -39,13 +39,24 @@ def dataHora():
     return data_final.strftime("%d/%M/%Y %H:%M:%S")
 
 def sobrescricao(x): ## CONT
+    global listagem
     caminho_DB = "Python Code/ArquivoDB"
     listagem_DB = os.listdir(caminho_DB)
     try:
-        for caminho in listagem_DB:
-            caminho_final = f"{caminho_DB}/{caminho}"
-            with open (caminho_final, "a") as arquivo_DB:
-                arquivo_DB.write(f"\n{x}")
+        lista_varNum = list()
+        caminho_final = f"{caminho_DB}/{listagem_DB[0]}"
+        with open (caminho_final, "a") as arquivo_DB:
+            lista_varNum.append(int(x))
+            arquivo_DB.write(f"\n{x}")
+        lista_a = list()
+        for item in listagem:
+            listagem_caminho_DB_2 = f"{listagem}/{item}"
+            with open(listagem_caminho_DB_2, "r") as arquivo_BD_2:
+                conteudo = arquivo_BD_2.read().strip()
+                if conteudo.isdigit():
+                    lista_a.append(item)
+        print(lista_varNum)
+        print(lista_a)
     except Exception as e:
         print(f"Erro >>> {e}")
 dataHoraVar = dataHora() 
