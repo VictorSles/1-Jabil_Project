@@ -41,26 +41,29 @@ def dataHora():
 def sobrescricao(x): ## CONT
     global listagem
     caminho_DB = "Python Code/ArquivoDB"
-    caminho_DB_soma = "Python Code/ArquivoDB_soma"
-    listagem_DB_soma = os.listdir(caminho_DB_soma)
     listagem_DB = os.listdir(caminho_DB)
     try:
-        lista_varNum = list()
-        caminho_final = f"{caminho_DB}/{listagem_DB[0]}"
+        caminho_final = os.path.join(caminho_DB, listagem_DB[0])
         with open (caminho_final, "a") as arquivo_DB:
-            lista_varNum.append(int(x))
             arquivo_DB.write(f"\n{x}")
-        lista_a = int()
-        for item in listagem:
-            listagem_caminho_DB_2 = os.path.join(listagem, item)
-            if os.path.isfile(listagem_caminho_DB_2):
-                with open(listagem_caminho_DB_2, "a") as arquivo_BD_2:
-                    conteudo = arquivo_BD_2.read().strip()
-                    for item_2 in listagem_DB_soma:
-                        listagem_caminho_DB_soma = os.path.join(item_2, listagem_DB_soma):
-                            
+            
+        with open(caminho_final, "r") as subArquivo_DB:
+            leitura_sub = subArquivo_DB.readline().strip()
+            dado_subArquivo = (int(leitura_sub[-1]))
+            return dado_subArquivo
     except Exception as e:
         print(f"Erro >>> {e}")
+def leitura():
+    caminho = "Python Code/ArquivoDB_soma"
+    listagem = os.listdir(caminho)
+    try:
+        for item in listagem:
+            caminho_item = os.path.join(caminho, item)
+            with open(caminho_item, "r") as arquivo:
+                dados_arquivo = arquivo.read()
+                return dados_arquivo
+    except Exception as e:
+        print(f"Error >>> {e}")
 dataHoraVar = dataHora() 
 
 ## SOLVED
@@ -101,8 +104,25 @@ def condicional(x):
             except Exception as a:
                     print(f"Error >>> {a}")
     return x
-var1 = condicional(cont)
-sobrescricao(var1)
+var_return_1 = condicional(cont)
+var_return_2 = sobrescricao(var_return_1)
+var_return_3 = leitura()
+def sobrescricao_2(x, y):
+    converter_x = int(x)
+    converter_y = int(y)
+    soma = converter_x + converter_y
+    caminho_arquivoDB_soma = "Python Code/ArquivoDB_soma"
+    listagem_caminho = os.listdir(caminho_arquivoDB_soma)
+    for item in listagem_caminho:
+        concat = os.path.join(caminho_arquivoDB_soma, item)
+        try:
+            with open(concat, "w") as arquivoDB_soma_sob:
+                arquivoDB_soma_sob.write(f"{soma}")
+            print("Arquivo escrito com sucesso!")
+        except Exception as e:
+            print(f"Error >>> {e}")
+sobrescricao_2(var_return_2, var_return_3)
+
 ### SOLVED
 
 # E-mail
