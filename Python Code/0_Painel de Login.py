@@ -43,7 +43,7 @@ def sobrescricao(x): ## CONT
     caminho_DB = "Python Code/ArquivoDB"
     listagem_DB = os.listdir(caminho_DB)
     try:
-        caminho_final = os.path.join(caminho_DB, listagem_DB[0])
+        caminho_final = os.path.join(caminho_DB, listagem_DB[-1])
         with open (caminho_final, "a") as arquivo_DB:
             arquivo_DB.write(f"{x}")
             return x
@@ -57,11 +57,30 @@ def leitura():
             caminho_item = os.path.join(caminho, item)
             with open(caminho_item, "r") as arquivo:
                 dados_arquivo = arquivo.read()
+                dados_arquivo = int(dados_arquivo)
+                print(type(dados_arquivo))
                 return dados_arquivo
     except Exception as e:
         print(f"Error >>> {e}")
+def leitura_2(): ## LEITURA CONT
+    caminho = "Python Code/ArquivoDB"
+    listagem_caminho = os.listdir(caminho)
+    for item in listagem_caminho:
+        caminho_arquivo = os.path.join(caminho, item)
+        with open (caminho_arquivo, "r") as arquivo_DB_2:
+            var = arquivo_DB_2.readline().strip()
+            var2 = int(var[-1])
+            print(type(var2))
+            return var2
+def espacamento():
+    caminho = "Python Code/ArquivoDB"
+    listagem = os.listdir(caminho)
+    for item in listagem:
+        caminho_arquivo = os.path.join(caminho, item)
+        with open(caminho_arquivo, "a") as alteracao_arquivo_DB:
+            alteracao_arquivo_DB.write(f"\n")
+            print("Alteração realizada com sucesso!")
 dataHoraVar = dataHora() 
-
 ## SOLVED
 
 # Condicional
@@ -100,13 +119,8 @@ def condicional(x):
             except Exception as a:
                     print(f"Error >>> {a}")
     return x
-var_return_1 = condicional(cont)
-var_return_2 = sobrescricao(var_return_1)
-var_return_3 = leitura()
 def sobrescricao_2(x, y):
-    converter_x = int(x)
-    converter_y = int(y)
-    soma = converter_x + converter_y
+    soma = x + y
     caminho_arquivoDB_soma = "Python Code/ArquivoDB_soma"
     listagem_caminho = os.listdir(caminho_arquivoDB_soma)
     for item in listagem_caminho:
@@ -117,7 +131,18 @@ def sobrescricao_2(x, y):
             print("Arquivo escrito com sucesso!")
         except Exception as e:
             print(f"Error >>> {e}")
-print(var_return_2, var_return_3)
+#
+#
+#
+var_return_1 = condicional(cont)
+var_return_2 = sobrescricao(var_return_1)
+print(var_return_2)
+leitura_2()
+var_leitura_2 = leitura_2()
+leitura()
+var_leitura = leitura()
+var_return_3 = sobrescricao_2(var_leitura_2, var_leitura)
+espacamento()
 
 ### SOLVED
 
