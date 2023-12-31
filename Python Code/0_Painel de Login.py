@@ -45,14 +45,10 @@ def sobrescricao(x): ## CONT
     try:
         caminho_final = os.path.join(caminho_DB, listagem_DB[0])
         with open (caminho_final, "a") as arquivo_DB:
-            arquivo_DB.write(f"\n{x}")
-            
-        with open(caminho_final, "r") as subArquivo_DB:
-            leitura_sub = subArquivo_DB.readline().strip()
-            dado_subArquivo = (int(leitura_sub[-1]))
-            return dado_subArquivo
+            arquivo_DB.write(f"{x}")
+            return x
     except Exception as e:
-        print(f"Erro >>> {e}")
+        print(f"Errorr >>> {e}")
 def leitura():
     caminho = "Python Code/ArquivoDB_soma"
     listagem = os.listdir(caminho)
@@ -121,7 +117,7 @@ def sobrescricao_2(x, y):
             print("Arquivo escrito com sucesso!")
         except Exception as e:
             print(f"Error >>> {e}")
-sobrescricao_2(var_return_2, var_return_3)
+print(var_return_2, var_return_3)
 
 ### SOLVED
 
