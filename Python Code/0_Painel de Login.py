@@ -18,37 +18,32 @@ else:
     print("Inválido")
     
 ## SOLVED
-    
 # Listagem + CONT_one
 listagem = os.listdir(caminho)
 cont = int()
 for c in listagem:
     if ".txt" in c:
         cont = cont + 1
-
 # CONTADOR
-
-
-
  ## SOLVED
- 
 # FUNÇÕES DE USO
 def dataHora():
     data1 = pytz.timezone('America/Manaus')
     data_final = datetime.datetime.now(data1)
     return data_final.strftime("%d/%M/%Y %H:%M:%S")
-
 def sobrescricao(x): ## CONT
     global listagem
     caminho_DB = "Python Code/ArquivoDB"
     listagem_DB = os.listdir(caminho_DB)
     try:
-        caminho_final = os.path.join(caminho_DB, listagem_DB[-1])
-        with open (caminho_final, "a") as arquivo_DB:
-            arquivo_DB.write(f"{x}")
-            return x
+        for item in listagem_DB:
+            caminho_final = os.path.join(caminho_DB, item)
+            with open (caminho_final, "a") as arquivo_DB:
+                arquivo_DB.write(f"{x}")
+                arquivo_DB.seek(0)
+        return x
     except Exception as e:
-        print(f"Errorr >>> {e}")
+        print(f"Error >>> {e}")
 def leitura():
     caminho = "Python Code/ArquivoDB_soma"
     listagem = os.listdir(caminho)
@@ -56,21 +51,20 @@ def leitura():
         for item in listagem:
             caminho_item = os.path.join(caminho, item)
             with open(caminho_item, "r") as arquivo:
-                dados_arquivo = arquivo.read()
-                dados_arquivo = int(dados_arquivo)
-                print(type(dados_arquivo))
+                dados_arquivo = arquivo.readline()
+                if len(dados_arquivo) >= 0:
+                    dados_arquivo = int(dados_arquivo)
                 return dados_arquivo
     except Exception as e:
         print(f"Error >>> {e}")
 def leitura_2(): ## LEITURA CONT
     caminho = "Python Code/ArquivoDB"
-    listagem_caminho = os.listdir(caminho)
-    for item in listagem_caminho:
+    listagem = os.listdir(caminho)
+    for item in listagem:
         caminho_arquivo = os.path.join(caminho, item)
-        with open (caminho_arquivo, "r") as arquivo_DB_2:
-            var = arquivo_DB_2.readline().strip()
-            var2 = int(var[-1])
-            print(type(var2))
+        with open(caminho_arquivo, "r") as arquivo_DB_read:
+            var2 = arquivo_DB_read.readlines()
+            print(len(var2))
             return var2
 def espacamento():
     caminho = "Python Code/ArquivoDB"
@@ -82,9 +76,7 @@ def espacamento():
             print("Alteração realizada com sucesso!")
 dataHoraVar = dataHora() 
 ## SOLVED
-
 # Condicional
-
 def condicional(x):
     global caminho
     global listagem
@@ -143,9 +135,7 @@ leitura()
 var_leitura = leitura()
 var_return_3 = sobrescricao_2(var_leitura_2, var_leitura)
 espacamento()
-
 ### SOLVED
-
 # E-mail
 #def envio_email():
 #    smtp_server = "smtp.gmail.com"

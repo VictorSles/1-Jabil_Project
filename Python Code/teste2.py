@@ -1,32 +1,33 @@
-## Quero fazer com que a cada execução, um arquivo especifico seja lido e reescrito
+# CONTATOR DE LINHAS 
 import os
-import datetime
-from datetime import datetime       ## Parece estranho mas é necessário
-import pytz
+caminho = "Python Code/ArquivoDB"
+caminho_2 = "Python Code/ArquivoDB_soma"
+caminho_3 = "Python Code/exemplo"
+listagem_1 = os.listdir(caminho)
+listagem_2 = os.listdir(caminho_2)
+listagem_3 = os.listdir(caminho_3)
+for item1 in caminho:
+    juncao = os.path.join(caminho, item1)
+for item2 in caminho_2:
+    juncao2 = os.path.join(caminho_2, item2)
+for item3 in caminho_3:
+    juncao3 = os.path.join(caminho_3, item3)
 def funcao(x):
-    var = x + 10
-    return var
-varDB = funcao(26)
-caminho = "Python Code/Pasta teste"
-
-## funcao dia e hora
-def tempo():
-    data1 = pytz.timezone('America/Manaus')
-    data2 = datetime.now(data1)
-    return data2.strftime("%d/%m/%Y %H:%M:%S")
-varQualquer = tempo()
-print(varQualquer)
-if os.path.isdir(caminho):
-    print("SIM É")
-else:
-    print("NÃO É")
-listagem = os.listdir(caminho)
-for x in listagem:
-    y = f"{caminho}/{x}"
-    cont = f"{varDB}"
-    with open(y, "a") as alteracao:
-        alteracao.write(f"[{varQualquer}] >>> Qº de arquivos criado: {cont}\n")
-        
-        
-        
-        
+    try:
+        with open(x, "r") as arquivo_ex:
+            var = arquivo_ex.readline()
+            var2 = len(var)
+            print(var2)
+    except Exception as e:
+        print(f"Error >>> {e}")
+contagem_atual = funcao(juncao)
+def funcao2(y):
+    global contagem_atual
+    global 
+    try:
+        with open(y, "w") as arquivoDB:
+            arquivoDB.write(str(contagem_atual))
+        with open(contagem_atual, "r") as arquivo_leitura:
+            for _ in range(contagem_atual):
+                next(arquivo_leitura)
+            with open(, "w") as 
