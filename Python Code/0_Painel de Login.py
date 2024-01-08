@@ -1,4 +1,4 @@
-## A biblioteca que me permite criar esse arquivo é:
+## As bibliotecas que me permitem criar esse script é:
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from tkinter import messagebox
@@ -7,79 +7,105 @@ import datetime
 import pytz
 import smtplib 
 import os
-## A biblioteca que me permite criar esse arquivo é:
+#####################################################
 caminho = "Python Code/Pasta teste"
-# 
-#  Validação
-#
+caminho_2 = "Python Code/ArquivoDB"
+caminho_3 = "Python Code/ArquivoDB_soma"
 if os.path.isdir(caminho):
     print("Valido")
 else:
     print("Inválido")
-    
-## SOLVED
-# Listagem + CONT_one
 listagem = os.listdir(caminho)
 cont = int()
 for c in listagem:
     if ".txt" in c:
         cont = cont + 1
-# CONTADOR
- ## SOLVED
-# FUNÇÕES DE USO
+listagem_2 = os.listdir(caminho_2)
+listagem_3 = os.listdir(caminho_3)
 def dataHora():
     data1 = pytz.timezone('America/Manaus')
     data_final = datetime.datetime.now(data1)
     return data_final.strftime("%d/%M/%Y %H:%M:%S")
 def sobrescricao(x): ## CONT
     global listagem
-    caminho_DB = "Python Code/ArquivoDB"
-    listagem_DB = os.listdir(caminho_DB)
+    global caminho_2
+    listagem_DB = os.listdir(caminho_2)
     try:
         for item in listagem_DB:
-            caminho_final = os.path.join(caminho_DB, item)
+            caminho_final = os.path.join(caminho_2, item)
             with open (caminho_final, "a") as arquivo_DB:
                 arquivo_DB.write(f"{x}")
-                arquivo_DB.seek(0)
         return x
     except Exception as e:
         print(f"Error >>> {e}")
-def leitura():
-    caminho = "Python Code/ArquivoDB_soma"
-    listagem = os.listdir(caminho)
+def leitura_2(): ## LEITURA CONT
+    global caminho_2
+    global caminho_3
+    global listagem_2
+    global listagem_3
+    for item in listagem_2:
+        caminho_arquivo = os.path.join(caminho_2, item)
+        with open(caminho_arquivo, "r") as arquivo_DB_read:
+            linhas = [int(line.strip()) for line in arquivo_DB_read.readlines()]
+            total = max(linhas)
+            linhas_2 = len(linhas) - 1
+            if linhas_2:
+                for item_2 in listagem_3:
+                    leitura_Arquivo_DB_soma = os.path.join(caminho_3, item_2)
+                    with open(leitura_Arquivo_DB_soma, "r") as arquivo_DB_soma_read:
+                        var_Arquivo_DB = arquivo_DB_soma_read.read()
+                        var_Arquivo_DB = int(var_Arquivo_DB)
+                        soma = var_Arquivo_DB + 1
+                        return soma
+def sobrescricao_2(x):
+    global caminho_3
+    listagem_3
+    x = str(x)
     try:
-        for item in listagem:
-            caminho_item = os.path.join(caminho, item)
-            with open(caminho_item, "r") as arquivo:
-                dados_arquivo = arquivo.readline()
-                if len(dados_arquivo) >= 0:
-                    dados_arquivo = int(dados_arquivo)
-                return dados_arquivo
+        for item in listagem_3:
+            juncao_caminho = os.path.join(caminho_3, item)
+            with open(juncao_caminho, "w") as arquivoDB_soma_file:
+                arquivoDB_soma_file.write(x)
+        return x, "OK"
     except Exception as e:
         print(f"Error >>> {e}")
-def leitura_2(): ## LEITURA CONT
-    caminho = "Python Code/ArquivoDB"
-    listagem = os.listdir(caminho)
-    for item in listagem:
-        caminho_arquivo = os.path.join(caminho, item)
-        with open(caminho_arquivo, "r") as arquivo_DB_read:
-            var2 = arquivo_DB_read.readlines()
-            print(len(var2))
-            return var2
 def espacamento():
-    caminho = "Python Code/ArquivoDB"
-    listagem = os.listdir(caminho)
-    for item in listagem:
-        caminho_arquivo = os.path.join(caminho, item)
+    global caminho_2
+    global listagem_2
+    for item in listagem_2:
+        caminho_arquivo = os.path.join(caminho_2, item)
         with open(caminho_arquivo, "a") as alteracao_arquivo_DB:
             alteracao_arquivo_DB.write(f"\n")
             print("Alteração realizada com sucesso!")
 dataHoraVar = dataHora() 
-## SOLVED
-# Condicional
-def condicional(x):
+def envio_email():
+    smtp_server = "smtp.gmail.com"
+    port = 587
+    email_sender = "israelvictords@gmail.com"
+    passW = "gsaa qlhd pjbi ljta"
+    email_receiver = "israelvic15@gmail.com"
+    mensagem = MIMEMultipart()
+    mensagem["From"] = email_sender
+    mensagem["To"] = email_receiver
+    mensagem["Subject"] = "TESTANDO A MINHA NOVA VERSÃO DO SOFTWARE"
+    body = "MAIS UM TESTE BEM SUCEDIDO!"
+    mensagem_2 = MIMEText(body, 'plain')
+    mensagem.attach(mensagem_2)
+    server = smtplib.SMTP("smtp.gmail.com: 587")
+    server.connect(smtp_server, port)
+    server.ehlo
+    server.starttls
+    server.ehlo
+    server.login(email_sender, passW)
+    texto = mensagem.as_string()
+    server.sendmail(email_sender, email_receiver, texto)
+    server.quit()
+def condicional(x, y):
     global caminho
+    global caminho_2
     global listagem
+    global listagem_2
+    global envio_email
     if x >= 10:
         for arquivo3 in listagem:
             lista_para_exclusao_3 = os.path.join(caminho, arquivo3)
@@ -90,76 +116,21 @@ def condicional(x):
                         print(f"Arquivo Nº {arquivo3} excluido com sucesso!")
             except Exception as c:
                 print(f"Error >>> {c}")
-    elif x >= 20:
-        for arquivo2 in listagem:
-            lista_para_exclusao_2 = os.path.join(caminho, arquivo2)
-            try:
-                for i2 in lista_para_exclusao_2:
-                    if os.path.isfile(lista_para_exclusao_2):
-                        os.remove(lista_para_exclusao_2)
-                        print(f"Arquivo Nº {arquivo2} excluido com sucesso!")
-            except Exception as b:
-                print(f"Error >>> {b}")
-    elif x >= 30:
-        for arquivo in listagem:
-            lista_para_exclusao = os.path.join(caminho, arquivo)
-            try:
-                for i in lista_para_exclusao:
-                    if os.path.isfile(lista_para_exclusao):
-                        os.remove(lista_para_exclusao)
-                        print(f"Arquivo Nº {arquivo} excluído com sucesso!")
-            except Exception as a:
-                    print(f"Error >>> {a}")
+    if y >= 20:
+        envio_email()
     return x
-def sobrescricao_2(x, y):
-    soma = x + y
-    caminho_arquivoDB_soma = "Python Code/ArquivoDB_soma"
-    listagem_caminho = os.listdir(caminho_arquivoDB_soma)
-    for item in listagem_caminho:
-        concat = os.path.join(caminho_arquivoDB_soma, item)
-        try:
-            with open(concat, "w") as arquivoDB_soma_sob:
-                arquivoDB_soma_sob.write(f"{soma}")
-            print("Arquivo escrito com sucesso!")
-        except Exception as e:
-            print(f"Error >>> {e}")
 #
 #
 #
-var_return_1 = condicional(cont)
-var_return_2 = sobrescricao(var_return_1)
-print(var_return_2)
-leitura_2()
 var_leitura_2 = leitura_2()
-leitura()
-var_leitura = leitura()
-var_return_3 = sobrescricao_2(var_leitura_2, var_leitura)
+var_return_1 = condicional(cont, var_leitura_2)
+var_return_3 = sobrescricao(var_return_1)
+print(var_leitura_2, "mais um teste")
+sobrescricao_2(var_leitura_2)
 espacamento()
 ### SOLVED
 # E-mail
-#def envio_email():
-#    smtp_server = "smtp.gmail.com"
-#    port = 587
-#    email_sender = "israelvictords@gmail.com"
-#    passW = "gsaa qlhd pjbi ljta"
-#    email_receiver = "israelvic15@gmail.com"
-#    mensagem = MIMEMultipart()
-#    mensagem["From"] = email_sender
-#    mensagem["To"] = email_receiver
-#    mensagem["Subject"] = "TESTANDO A MINHA NOVA VERSÃO DO SOFTWARE"
-#    body = "MAIS UM TESTE BEM SUCEDIDO!"
-#    mensagem_2 = MIMEText(body, 'plain')
-#    mensagem.attach(mensagem_2)
-#    server = smtplib.SMTP("smtp.gmail.com: 587")
-#    server.connect(smtp_server, port)
-#    server.ehlo
-#    server.starttls
-#    server.ehlo
-#    server.login(email_sender, passW)
-#    texto = mensagem.as_string()
-#    server.sendmail(email_sender, email_receiver, texto)
-#    server.quit()
-#envio_email()
+
 ##           
 ##  Painel de Login
 ##

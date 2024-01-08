@@ -31,3 +31,16 @@ def funcao2(y):
             for _ in range(contagem_atual):
                 next(arquivo_leitura)
             with open(, "w") as 
+            
+            
+            
+elif x >= 30:
+        for arquivo in listagem:
+            lista_para_exclusao = os.path.join(caminho, arquivo)
+            try:
+                for i in lista_para_exclusao:
+                    if os.path.isfile(lista_para_exclusao):
+                        os.remove(lista_para_exclusao)
+                        print(f"Arquivo Nº {arquivo} excluído com sucesso!")
+            except Exception as a:
+                    print(f"Error >>> {a}")
