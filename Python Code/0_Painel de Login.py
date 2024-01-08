@@ -1,4 +1,4 @@
-## As bibliotecas que me permitem criar esse script é:
+## As bibliotecas que me permitiram criar esse script é:
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from tkinter import messagebox
@@ -26,7 +26,7 @@ def dataHora():
     data1 = pytz.timezone('America/Manaus')
     data_final = datetime.datetime.now(data1)
     return data_final.strftime("%d/%M/%Y %H:%M:%S")
-def sobrescricao(x): ## CONT
+def sobrescricao(x): 
     global listagem
     global caminho_2
     listagem_DB = os.listdir(caminho_2)
@@ -38,7 +38,7 @@ def sobrescricao(x): ## CONT
         return x
     except Exception as e:
         print(f"Error >>> {e}")
-def leitura_2(): ## LEITURA CONT
+def leitura_2(): 
     global caminho_2
     global caminho_3
     global listagem_2
@@ -59,14 +59,14 @@ def leitura_2(): ## LEITURA CONT
                         return soma
 def sobrescricao_2(x):
     global caminho_3
-    listagem_3
+    global listagem_3
     x = str(x)
     try:
         for item in listagem_3:
             juncao_caminho = os.path.join(caminho_3, item)
             with open(juncao_caminho, "w") as arquivoDB_soma_file:
                 arquivoDB_soma_file.write(x)
-        return x, "OK"
+        return x
     except Exception as e:
         print(f"Error >>> {e}")
 def espacamento():
@@ -80,33 +80,31 @@ def espacamento():
 dataHoraVar = dataHora() 
 def envio_email():
     smtp_server = "smtp.gmail.com"
-    port = 587
+    porta = 587
     email_sender = "israelvictords@gmail.com"
-    passW = "gsaa qlhd pjbi ljta"
+    passW = "vqvs yzoh myma htzx"
     email_receiver = "israelvic15@gmail.com"
-    mensagem = MIMEMultipart()
-    mensagem["From"] = email_sender
-    mensagem["To"] = email_receiver
-    mensagem["Subject"] = "TESTANDO A MINHA NOVA VERSÃO DO SOFTWARE"
+    mesagem = MIMEMultipart()
+    mesagem['From'] = email_sender
+    mesagem['To'] = email_receiver
+    mesagem['Subject'] = "TESTANDO A MINHA NOVA VERSÃO DO SOFTWARE"
     body = "MAIS UM TESTE BEM SUCEDIDO!"
-    mensagem_2 = MIMEText(body, 'plain')
-    mensagem.attach(mensagem_2)
-    server = smtplib.SMTP("smtp.gmail.com: 587")
-    server.connect(smtp_server, port)
-    server.ehlo
-    server.starttls
-    server.ehlo
+    mesagem.attach(MIMEText(body, 'plain'))
+    server = smtplib.SMTP('smtp.gmail.com: 587')
+    server.connect(smtp_server, porta)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
     server.login(email_sender, passW)
-    texto = mensagem.as_string()
+    texto = mesagem.as_string()
     server.sendmail(email_sender, email_receiver, texto)
     server.quit()
-def condicional(x, y):
+def condicional(x):
     global caminho
     global caminho_2
     global listagem
     global listagem_2
-    global envio_email
-    if x >= 10:
+    if x >= 3:
         for arquivo3 in listagem:
             lista_para_exclusao_3 = os.path.join(caminho, arquivo3)
             try:
@@ -116,56 +114,55 @@ def condicional(x, y):
                         print(f"Arquivo Nº {arquivo3} excluido com sucesso!")
             except Exception as c:
                 print(f"Error >>> {c}")
-    if y >= 20:
-        envio_email()
     return x
-#
-#
-#
+def envio_email_2(x):
+    global dataHoraVar
+    global envio_email
+    if x == "5":
+        envio_email()
+        mensagem = f"Ultimo E-mail enviado: {dataHoraVar}"
+        return mensagem
+    else:
+        return x
 var_leitura_2 = leitura_2()
-var_return_1 = condicional(cont, var_leitura_2)
+var_return_1 = condicional(cont)
 var_return_3 = sobrescricao(var_return_1)
-print(var_leitura_2, "mais um teste")
-sobrescricao_2(var_leitura_2)
+var_return_4 = sobrescricao_2(var_leitura_2)
+var_return_4
+var_return_5 = envio_email_2(var_return_4)
 espacamento()
-### SOLVED
-# E-mail
 
-##           
 ##  Painel de Login
-##
-#def verificar_credenciais():
-#    usuario = entry_usuario.get()
-#    senha = entry_senha.get()
-#    if usuario == "123" and senha == "123":
-#        messagebox.showinfo("OK", "Autenticação válida")
-#        root.destroy()
-#        root_login_2 = tk.Tk()
-#        root_login_2.title("Informações de Contagem")
-#        label_login_2 = tk.Label(root_login_2, text=f"Nº de arquivos: {cont}")
-#        label_login_2.pack()
-#        label_login_22 = tk.Label(root_login_2, text=f"{cont}")
-#        label_login_22.pack()
-#    else:
-#        messagebox.showerror("NOK", "Autenticação Inválida")
-### CRIAÇÃO DA INTERFACE SIMPLES
-#root = tk.Tk()    ## Tk representa a JANELA PRINCIPAL
-#root.title("Login")
-#
-### Criar campos de entrada para usuário e senha
-#label_usuario = tk.Label(root, text="Usuário: ") ## Label serve para adicionar textos ou imagens dentro da interface
-#label_usuario.pack() ## É um METODO de organização para posicionar os widgets dentro de um conteiner (aba de login no meu caso)
-#entry_usuario = tk.Entry(root) ## Serve para adicionar a caixa que ira captar as informações do usuário
-#entry_usuario.pack()
-#
-### O mesmo processo com a senha
-#label_senha = tk.Label(root, text="Senha: ")
-#label_senha.pack()
-#entry_senha = tk.Entry(root, show="*")
-#entry_senha.pack()
-#
-### Botao
-#botao = tk.Button(root, text="Login", command=verificar_credenciais)
-#botao.pack()
-### O comando abaixo serve para iniciar a interface gráfica
-#root.mainloop()
+
+def verificar_credenciais():
+    global var_return_4
+    global var_return_5
+    usuario = entry_usuario.get()
+    senha = entry_senha.get()
+    if usuario == "login" and senha == "password":
+        messagebox.showinfo("OK", "Autenticação válida")
+        root.destroy()
+        root_login_2 = tk.Tk()
+        root_login_2.title("Informações de Contagem")
+        frame = tk.Frame(root_login_2, height=7, width=200)
+        frame.pack()
+        label_login_2 = tk.Label(root_login_2, text=f"Nº de arquivos: {var_return_4}", justify="center", anchor="center")
+        label_login_2.pack()
+        label_login_22 = tk.Label(root_login_2, text=f"{var_return_5}", justify="center", anchor="center")
+        label_login_22.pack()
+    else:
+        messagebox.showerror("NOK", "Autenticação Inválida")
+## CRIAÇÃO DA INTERFACE SIMPLES
+root = tk.Tk()    ## Tk representa a JANELA PRINCIPAL
+root.title("Login")
+label_usuario = tk.Label(root, text="Usuário: ") 
+label_usuario.pack()
+entry_usuario = tk.Entry(root)
+entry_usuario.pack()
+label_senha = tk.Label(root, text="Senha: ")
+label_senha.pack()
+entry_senha = tk.Entry(root, show="*")
+entry_senha.pack()
+botao = tk.Button(root, text="Login", command=verificar_credenciais)
+botao.pack()
+root.mainloop()
